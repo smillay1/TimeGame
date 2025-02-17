@@ -61,8 +61,8 @@ public class GameManager : MonoBehaviour
 
         float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
 
-        horse1 = Instantiate(horse1Prefab, new Vector3(leftEdge, 1.5f, 0), Quaternion.identity);
-        horse2 = Instantiate(horse2Prefab, new Vector3(leftEdge, -1.5f, 0), Quaternion.identity);
+        horse1 = Instantiate(horse1Prefab, new Vector3(leftEdge, -2f, 0), Quaternion.identity);
+        horse2 = Instantiate(horse2Prefab, new Vector3(leftEdge, -3.1f, 0), Quaternion.identity);
 
         Debug.Log("Horse 1 spawned at: " + horse1.transform.position);
         Debug.Log("Horse 2 spawned at: " + horse2.transform.position);
@@ -157,8 +157,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
-        horse1.transform.position = new Vector3(leftEdge, 1.5f, 0);
-        horse2.transform.position = new Vector3(leftEdge, -1.5f, 0);
+        horse1.transform.position = new Vector3(leftEdge, -2f, 0);
+        horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
 
         StartNewRound();
     }

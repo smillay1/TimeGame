@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5a5b6946a161e4764b3ea8b34bd86a98
+guid: 58eb731864ecf4231b3f7a34c2abee6f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2615874204119335
-    second: blue_0
+      213: -2057895216135329162
+    second: racetrack_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue_0
+      name: racetrack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 736
-        height: 919
+        width: 600
+        height: 401
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9de494350e4b6fff0800000000000000
-      internalID: -2615874204119335
+      spriteID: 67a27414433e073e0800000000000000
+      internalID: -2057895216135329162
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      blue_0: -2615874204119335
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
