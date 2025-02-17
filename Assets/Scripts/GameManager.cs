@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
 {
-    targetTime = Random.Range(5f, 10f);
+    targetTime = Random.Range(1f, 7f);
 
     if (targetTimeText == null)
     {
