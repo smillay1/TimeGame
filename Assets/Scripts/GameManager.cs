@@ -108,12 +108,12 @@ public class GameManager : MonoBehaviour
 
         if (player1Difference < player2Difference)
         {
-            horse1.transform.position += new Vector3(moveDistance, 0, 0);
+            StartCoroutine(MoveHorseSmoothly(horse1, new Vector3(moveDistance, 0, 0), 1f));
             Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
         }
         else if (player2Difference < player1Difference)
         {
-            horse2.transform.position += new Vector3(moveDistance, 0, 0);
+            StartCoroutine(MoveHorseSmoothly(horse2, new Vector3(moveDistance, 0, 0), 1f));
             Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
         }
         else
@@ -162,4 +162,21 @@ public class GameManager : MonoBehaviour
 
         StartNewRound();
     }
+
+    IEnumerator MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
+    {
+        Vector3 startPosition = horse.transform.position;
+        Vector3 targetPosition = startPosition + moveOffset;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            horse.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null; // Wait until the next frame
+        }
+
+        horse.transform.position = targetPosition; // Ensure the final position is exact
+    }
+
 }
