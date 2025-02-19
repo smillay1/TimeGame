@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1345304284913567555}
   - component: {fileID: 3958490497121220005}
+  - component: {fileID: 2815530770350650229}
+  - component: {fileID: 4199487038288729434}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -87,3 +89,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2815530770350650229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7613551929814466384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323bd133ef2c50944856913232dc44f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runningSprites:
+  - {fileID: 6174697200095822207, guid: 5263a867c968c48d2a1f2e89b10a6dfb, type: 3}
+  - {fileID: 7146862777023017198, guid: f0aaec82a4cb84776bcb74d016101a93, type: 3}
+  standingSprite: {fileID: 6725704276901192190, guid: 8537996eb951b4387bfb99181ac0197c, type: 3}
+  animationSpeed: 0.3
+--- !u!50 &4199487038288729434
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7613551929814466384}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

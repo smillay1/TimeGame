@@ -108,12 +108,12 @@ public class GameManager : MonoBehaviour
 
         if (player1Difference < player2Difference)
         {
-            StartCoroutine(MoveHorseSmoothly(horse1, new Vector3(moveDistance, 0, 0), 1f));
+            MoveHorseSmoothly(horse1, new Vector3(moveDistance, 0, 0), 1f);
             Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
         }
         else if (player2Difference < player1Difference)
         {
-            StartCoroutine(MoveHorseSmoothly(horse2, new Vector3(moveDistance, 0, 0), 1f));
+            MoveHorseSmoothly(horse2, new Vector3(moveDistance, 0, 0), 1f);
             Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
         }
         else
@@ -163,20 +163,35 @@ public class GameManager : MonoBehaviour
         StartNewRound();
     }
 
-    IEnumerator MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
+    private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
     {
-        Vector3 startPosition = horse.transform.position;
-        Vector3 targetPosition = startPosition + moveOffset;
-        float elapsedTime = 0f;
+        //Vector3 startPosition = horse.transform.position;
+        //Vector3 targetPosition = startPosition + moveOffset;
+        //float elapsedTime = 0f;
 
-        while (elapsedTime < duration)
+        //while (elapsedTime < duration)
+        //{
+        //    horse.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+        //    elapsedTime += Time.deltaTime;
+        //    yield return null; // Wait until the next frame
+        //}
+
+        //horse.transform.position = targetPosition; // Ensure the final position is exact
+
+        Player horseController = horse.GetComponent<Player>();
+        if (horseController == null)
         {
-            horse.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null; // Wait until the next frame
+            Debug.LogError("Horse has no Player script");
+        } else
+        {
+            // Calculate the required velocity to reach moveOffset in the given duration
+            Vector2 velocity = new Vector2(moveOffset.x / duration, moveOffset.y / duration);
+
+            // Call Move with calculated velocity
+            horseController.Move(velocity, duration);
+
         }
 
-        horse.transform.position = targetPosition; // Ensure the final position is exact
     }
 
 }
