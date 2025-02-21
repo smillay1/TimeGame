@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
             {
                 DetermineRoundWinner();
             }
-            
+
         }
     }
 
@@ -69,31 +70,31 @@ public class GameManager : MonoBehaviour
     }
 
     void StartNewRound()
-{
-    targetTime = Random.Range(1f, 7f);
-
-    if (targetTimeText == null)
     {
-        Debug.LogError("Target Time Text is not assigned in GameManager!");
-        return;
+        targetTime = Random.Range(1f, 7f);
+
+        if (targetTimeText == null)
+        {
+            Debug.LogError("Target Time Text is not assigned in GameManager!");
+            return;
+        }
+
+        // Clear and update the text
+        targetTimeText.text = ""; // Clear the previous text
+        targetTimeText.text = "Target Time: " + targetTime.ToString("F2") + "s";
+
+        // Force UI to refresh
+        targetTimeText.ForceMeshUpdate();
+        Canvas.ForceUpdateCanvases();
+        targetTimeText.SetAllDirty();
+
+        Debug.Log("New target time displayed on UI: " + targetTime);
+
+        startTime = Time.time;
+        player1Time = 0f;
+        player2Time = 0f;
+        roundActive = true;
     }
-
-    // Clear and update the text
-    targetTimeText.text = ""; // Clear the previous text
-    targetTimeText.text = "Target Time: " + targetTime.ToString("F2") + "s";
-
-    // Force UI to refresh
-    targetTimeText.ForceMeshUpdate();
-    Canvas.ForceUpdateCanvases();
-    targetTimeText.SetAllDirty();
-
-    Debug.Log("New target time displayed on UI: " + targetTime);
-    
-    startTime = Time.time;
-    player1Time = 0f;
-    player2Time = 0f;
-    roundActive = true;
-}
 
 
 
@@ -106,20 +107,10 @@ public class GameManager : MonoBehaviour
         float player1Difference = Mathf.Abs(targetTime - player1Time);
         float player2Difference = Mathf.Abs(targetTime - player2Time);
 
-        if (player1Difference < player2Difference)
-        {
-            StartCoroutine(MoveHorseSmoothly(horse1, new Vector3(moveDistance, 0, 0), 1f));
-            Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
-        }
-        else if (player2Difference < player1Difference)
-        {
-            StartCoroutine(MoveHorseSmoothly(horse2, new Vector3(moveDistance, 0, 0), 1f));
-            Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
-        }
-        else
-        {
-            Debug.Log("Tie round! No movement.");
-        }
+        MoveHorseSmoothly(horse1, new Vector3((targetTime / 2) * (moveDistance / 8) / player1Difference, 0, 0), 1f);
+        Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
+        MoveHorseSmoothly(horse2, new Vector3((targetTime / 2) * (moveDistance / 8) / player2Difference, 0, 0), 1f);
+        Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
 
         CheckWinCondition();
     }
@@ -143,40 +134,48 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator WaitBeforeNextRound()
-{
-    Debug.Log("Waiting before next round...");
-    yield return new WaitForSeconds(2f); 
+    {
+        Debug.Log("Waiting before next round...");
+        yield return new WaitForSeconds(2f);
 
-    Debug.Log("Starting new round...");
-    StartNewRound();
-}
+        Debug.Log("Starting new round...");
+        StartNewRound();
+    }
 
 
     IEnumerator RestartGame()
     {
         yield return new WaitForSeconds(3f);
 
-        float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
-        horse1.transform.position = new Vector3(leftEdge, -2f, 0);
-        horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
+        SceneManager.LoadScene("Start");
 
-        StartNewRound();
+        //OLD WAY OF RESTARTING SCENE BEFORE WE HAD START SCREEN \/
+
+        //float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
+        //horse1.transform.position = new Vector3(leftEdge, -2f, 0);
+        //horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
+
+        //StartNewRound();
     }
 
-    IEnumerator MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
+    private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
     {
-        Vector3 startPosition = horse.transform.position;
-        Vector3 targetPosition = startPosition + moveOffset;
-        float elapsedTime = 0f;
 
-        while (elapsedTime < duration)
+        Player horseController = horse.GetComponent<Player>();
+        if (horseController == null)
         {
-            horse.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null; // Wait until the next frame
+            Debug.LogError("Horse has no Player script");
+        }
+        else
+        {
+            // Calculate the required velocity to reach moveOffset in the given duration
+            Vector2 velocity = new Vector2(moveOffset.x / duration, moveOffset.y / duration);
+
+            // Call Move with calculated velocity
+            horseController.Move(velocity, duration);
+
         }
 
-        horse.transform.position = targetPosition; // Ensure the final position is exact
     }
 
 }
