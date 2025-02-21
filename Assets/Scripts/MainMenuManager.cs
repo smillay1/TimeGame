@@ -7,4 +7,9 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Jack");
     }
+
+    public void StartFrog()
+    {
+        SceneManager.LoadScene("Camille");
+    }
 }

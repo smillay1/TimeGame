@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject horse2Prefab;
     public float moveDistance = 1.5f;
     public float finishLineX = 8f;
+    public float timeLow = 1f;
+    public float timeHigh = 5f;
 
     private GameObject horse1;
     private GameObject horse2;
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
     {
-        targetTime = Random.Range(1f, 7f);
+        targetTime = Random.Range(timeLow, timeHigh);
 
         if (targetTimeText == null)
         {
