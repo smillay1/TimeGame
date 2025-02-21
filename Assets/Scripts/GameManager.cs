@@ -107,9 +107,9 @@ public class GameManager : MonoBehaviour
         float player1Difference = Mathf.Abs(targetTime - player1Time);
         float player2Difference = Mathf.Abs(targetTime - player2Time);
 
-        MoveHorseSmoothly(horse1, new Vector3((moveDistance / 4) / player1Difference, 0, 0), 1f);
+        MoveHorseSmoothly(horse1, new Vector3((targetTime / 2) * (moveDistance / 8) / player1Difference, 0, 0), 1f);
         Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
-        MoveHorseSmoothly(horse2, new Vector3((moveDistance / 4) / player2Difference, 0, 0), 1f);
+        MoveHorseSmoothly(horse2, new Vector3((targetTime / 2) * (moveDistance / 8) / player2Difference, 0, 0), 1f);
         Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
 
         CheckWinCondition();
