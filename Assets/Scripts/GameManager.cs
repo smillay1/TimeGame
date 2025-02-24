@@ -102,8 +102,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Clear and update the text
-        targetTimeText.text = ""; // Clear the previous text
+        // update the text
         targetTimeText.text = "Target Time: " + targetTime.ToString("F2") + "s";
 
         // Force UI to refresh
@@ -124,9 +123,6 @@ public class GameManager : MonoBehaviour
 
         
     }
-
-
-
 
 
     void DetermineRoundWinner()
@@ -208,6 +204,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("Start");
+        yield return new WaitForSeconds(1f);
 
         //OLD WAY OF RESTARTING SCENE BEFORE WE HAD START SCREEN \/
 
@@ -216,8 +213,8 @@ public class GameManager : MonoBehaviour
         //horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
 
         //StartNewRound();
-        horse1.GetComponent<Player>().ResetMoveCount();
-        horse2.GetComponent<Player>().ResetMoveCount();
+        SpawnHorses();
+        StartNewRound();
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
