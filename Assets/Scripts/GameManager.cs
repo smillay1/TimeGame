@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI targetTimeText;
@@ -23,6 +24,11 @@ public class GameManager : MonoBehaviour
     private bool roundActive = false;
     private float player1Time = 0f;
     private float player2Time = 0f;
+    public AudioSource clockTickingSound;
+
+    public GameObject speedPowerUpPrefab;
+    public GameObject freezePowerUpPrefab;
+    private bool powerUpSpawned = false;
 
     void Start()
     {
@@ -39,12 +45,14 @@ public class GameManager : MonoBehaviour
             {
                 player1Time = Time.time - startTime;
                 Debug.Log("Player 1 guessed: " + player1Time);
+                CheckStopClockSound();
             }
 
             if (Input.GetKeyDown(KeyCode.RightShift) && player2Time == 0)
             {
                 player2Time = Time.time - startTime;
                 Debug.Log("Player 2 guessed: " + player2Time);
+                CheckStopClockSound();
             }
 
             if (player1Time > 0 && player2Time > 0)
@@ -53,7 +61,20 @@ public class GameManager : MonoBehaviour
             }
 
         }
+
+        int moveDifference = 0;
+        if (horse1 != null && horse2 != null)
+        {
+            moveDifference = Mathf.Abs(horse1.GetComponent<Player>().MoveCount - horse2.GetComponent<Player>().MoveCount);
+        }
+
+        if (moveDifference >= 3 && !powerUpSpawned)
+        {
+            SpawnPowerUp();
+            powerUpSpawned = true; // Only spawn one until collected
+        }
     }
+    
 
     void SpawnHorses()
     {
@@ -76,6 +97,8 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
     {
+        roundActive = true;
+        Debug.Log("StartNewRound() was called! Target time: " + targetTime);
         targetTime = Random.Range(timeLow, timeHigh);
 
         if (targetTimeText == null)
@@ -95,10 +118,21 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("New target time displayed on UI: " + targetTime);
 
+        horse1.GetComponent<Player>().ResetMovement();
+        horse2.GetComponent<Player>().ResetMovement();
+        horse1.GetComponent<Player>().ResetMoveCount();
+        horse2.GetComponent<Player>().ResetMoveCount();
+        
         startTime = Time.time;
         player1Time = 0f;
         player2Time = 0f;
+<<<<<<< HEAD
         roundActive = true;
+        PlayClockSound();
+=======
+
+        
+>>>>>>> abb6889dbfc1c28a404f7e67c30f085a094cacb9
     }
 
 
@@ -194,6 +228,8 @@ public class GameManager : MonoBehaviour
         //horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
 
         //StartNewRound();
+        horse1.GetComponent<Player>().ResetMoveCount();
+        horse2.GetComponent<Player>().ResetMoveCount();
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
@@ -216,6 +252,119 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void PlayClockSound()
+    {
+        if (clockTickingSound != null && !clockTickingSound.isPlaying)
+        {
+            clockTickingSound.Play();
+        }
+    }
+
+    void StopClockSound()
+    {
+        if (clockTickingSound != null && clockTickingSound.isPlaying)
+        {
+            clockTickingSound.Stop();
+        }
+    }
+
+    void CheckStopClockSound()
+    {
+        if (player1Time > 0 && player2Time > 0)
+        {
+            StopClockSound();
+        }
+    }
+=======
+    void SpawnPowerUp()
+    {
+        if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
+
+        GameObject trailingHorse = horse1.transform.position.x < horse2.transform.position.x ? horse1 : horse2;
+
+        // Only spawn if the trailing horse HAS moved and WILL move next round
+        if (trailingHorse.GetComponent<Player>().HasMovedThisRound)
+        {
+            GameObject powerUpPrefab = Random.value > 0.5f ? speedPowerUpPrefab : freezePowerUpPrefab;
+
+            Vector3 spawnPosition = trailingHorse.transform.position + Vector3.right * 2.0f;
+            GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+
+            // Reset power-up spawn flag when collected
+            powerUp.GetComponent<Powerup>().OnCollected += () => powerUpSpawned = false;
+        }
+    }
+
+    public void ResetPowerUpSpawn()
+    {
+        if (!powerUpSpawned) return;
+        powerUpSpawned = false;
+    }
+
+<<<<<<< HEAD
+    void PlayClockSound()
+    {
+        if (clockTickingSound != null && !clockTickingSound.isPlaying)
+        {
+            clockTickingSound.Play();
+        }
+    }
+
+    void StopClockSound()
+    {
+        if (clockTickingSound != null && clockTickingSound.isPlaying)
+        {
+            clockTickingSound.Stop();
+        }
+    }
+
+    void CheckStopClockSound()
+    {
+        if (player1Time > 0 && player2Time > 0) 
+        {
+            StopClockSound();
+        }
+    }
+=======
+    void SpawnPowerUp()
+    {
+        if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
+
+        GameObject trailingHorse = horse1.transform.position.x < horse2.transform.position.x ? horse1 : horse2;
+
+        // Only spawn if the trailing horse HAS moved and WILL move next round
+        if (trailingHorse.GetComponent<Player>().HasMovedThisRound)
+        {
+            GameObject powerUpPrefab = Random.value > 0.5f ? speedPowerUpPrefab : freezePowerUpPrefab;
+
+            Vector3 spawnPosition = trailingHorse.transform.position + Vector3.right * 2.0f;
+            GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+
+            // Reset power-up spawn flag when collected
+            powerUp.GetComponent<Powerup>().OnCollected += () => powerUpSpawned = false;
+        }
+    }
+
+    public void ResetPowerUpSpawn()
+    {
+        if (!powerUpSpawned) return;
+        powerUpSpawned = false;
+    }
+
+        private void GetTracks()
+    {
+        track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();
+        if(track1 == null)
+        {
+            Debug.LogError("Need a track1 and script");
+        }
+
+        track2 = GameObject.FindGameObjectWithTag("Player2Track").GetComponent<TrackEffects>();
+        if (track2 == null)
+        {
+            Debug.LogError("Need a track2 and script");
+        }
+    }
     private void GetTracks()
     {
         track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();
