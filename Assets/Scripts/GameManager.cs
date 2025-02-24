@@ -4,9 +4,11 @@ using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI targetTimeText;
+    public GameObject floatingTextPrefab;
     public GameObject horse1Prefab;
     public GameObject horse2Prefab;
     public float moveDistance = 1.5f;
@@ -129,6 +131,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("It's a tie!");
         }
 
+        ShowFloatingText(horse1.transform.position, player1Difference);
+        ShowFloatingText(horse2.transform.position, player2Difference);
+
         CheckWinCondition();
     }
 
@@ -149,6 +154,19 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WaitBeforeNextRound());
         }
     }
+
+    void ShowFloatingText(Vector3 position, float value)
+{
+    if (floatingTextPrefab != null)
+    {
+        GameObject textObj = Instantiate(floatingTextPrefab, position + new Vector3(0, 1f, 0), Quaternion.identity);
+        textObj.GetComponent<FloatingText>().SetText(value);
+    }
+    else
+    {
+        Debug.LogError("FloatingText prefab not assigned in GameManager!");
+    }
+}
 
     IEnumerator WaitBeforeNextRound()
     {
