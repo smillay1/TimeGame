@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject horse1;
     private GameObject horse2;
+    private TrackEffects track1;
+    private TrackEffects track2;
     private float targetTime;
     private float startTime;
     private bool roundActive = false;
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         SpawnHorses();
         StartNewRound();
+        GetTracks();
     }
 
     void Update()
@@ -114,6 +117,24 @@ public class GameManager : MonoBehaviour
         
         float effectDuration = 2f;
 
+        if (player1Difference > 1)
+        {
+            track1.FlashRed();
+        }
+        else if (player1Difference < .2)
+        {
+            track1.FlashGreen();
+        }
+
+        if (player2Difference > 1)
+        {
+            track2.FlashRed();
+        }
+        else if (player2Difference < .2)
+        {
+            track2.FlashGreen();
+        }
+
         if (player1Difference < player2Difference)
         {
             horse1.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
@@ -192,6 +213,26 @@ public class GameManager : MonoBehaviour
             horseController.Move(velocity, duration);
 
         }
+
+    }
+
+    private void GetTracks()
+    {
+        track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();
+        if(track1 == null)
+        {
+            Debug.LogError("Need a track1 and script");
+        }
+
+        track2 = GameObject.FindGameObjectWithTag("Player2Track").GetComponent<TrackEffects>();
+        if (track2 == null)
+        {
+            Debug.LogError("Need a track2 and script");
+        }
+    }
+
+    private void RainBowTrack()
+    {
 
     }
 
