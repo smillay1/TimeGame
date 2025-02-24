@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a16c71a36d7d544c9baf8f862802c2a1
+guid: 5c5dbfb660e4342fe8efa13d80b09b7d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4642147599611299522
-    second: uni2run2_0
+      213: -2983090718515566234
+    second: lightning_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: uni2run2_0
+      name: lightning_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 38
-        width: 61
-        height: 48
+        x: 186
+        y: 74
+        width: 426
+        height: 437
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c683cd85a83c6040800000000000000
-      internalID: 4642147599611299522
+      spriteID: 6696d1eebcee996d0800000000000000
+      internalID: -2983090718515566234
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b8c72f3723baa4b1192a2c2d51fa3f88
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      uni2run2_0: 4642147599611299522
+      lightning_0: -2983090718515566234
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
