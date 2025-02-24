@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI targetTimeText;
-    public GameObject floatingTextPrefab;
     public GameObject horse1Prefab;
     public GameObject horse2Prefab;
     public float moveDistance = 1.5f;
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     private bool roundActive = false;
     private float player1Time = 0f;
     private float player2Time = 0f;
+    public AudioSource clockTickingSound;
 
     void Start()
     {
@@ -38,12 +38,14 @@ public class GameManager : MonoBehaviour
             {
                 player1Time = Time.time - startTime;
                 Debug.Log("Player 1 guessed: " + player1Time);
+                CheckStopClockSound();
             }
 
             if (Input.GetKeyDown(KeyCode.RightShift) && player2Time == 0)
             {
                 player2Time = Time.time - startTime;
                 Debug.Log("Player 2 guessed: " + player2Time);
+                CheckStopClockSound();
             }
 
             if (player1Time > 0 && player2Time > 0)
@@ -98,6 +100,7 @@ public class GameManager : MonoBehaviour
         player1Time = 0f;
         player2Time = 0f;
         roundActive = true;
+        PlayClockSound();
     }
 
 
@@ -131,9 +134,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("It's a tie!");
         }
 
-        ShowFloatingText(horse1.transform.position, player1Difference);
-        ShowFloatingText(horse2.transform.position, player2Difference);
-
         CheckWinCondition();
     }
 
@@ -154,19 +154,6 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WaitBeforeNextRound());
         }
     }
-
-    void ShowFloatingText(Vector3 position, float value)
-{
-    if (floatingTextPrefab != null)
-    {
-        GameObject textObj = Instantiate(floatingTextPrefab, position + new Vector3(0, 1f, 0), Quaternion.identity);
-        textObj.GetComponent<FloatingText>().SetText(value);
-    }
-    else
-    {
-        Debug.LogError("FloatingText prefab not assigned in GameManager!");
-    }
-}
 
     IEnumerator WaitBeforeNextRound()
     {
@@ -211,6 +198,30 @@ public class GameManager : MonoBehaviour
 
         }
 
+    }
+
+    void PlayClockSound()
+    {
+        if (clockTickingSound != null && !clockTickingSound.isPlaying)
+        {
+            clockTickingSound.Play();
+        }
+    }
+
+    void StopClockSound()
+    {
+        if (clockTickingSound != null && clockTickingSound.isPlaying)
+        {
+            clockTickingSound.Stop();
+        }
+    }
+
+    void CheckStopClockSound()
+    {
+        if (player1Time > 0 && player2Time > 0) 
+        {
+            StopClockSound();
+        }
     }
 
 }
