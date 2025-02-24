@@ -129,6 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runningSprites:
-  - {fileID: 5491295459281514357, guid: bb7288d97afd841d087381ce589cdbf9, type: 3}
+  - {fileID: 4162792547080675479, guid: 6120a2e33130141678a1727cf49b5d7f, type: 3}
   standingSprite: {fileID: 5491295459281514357, guid: bb7288d97afd841d087381ce589cdbf9, type: 3}
   animationSpeed: 0.5
