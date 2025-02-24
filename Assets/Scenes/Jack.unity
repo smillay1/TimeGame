@@ -421,6 +421,8 @@ MonoBehaviour:
   horse2Prefab: {fileID: 7613551929814466384, guid: 34414852f9286470b9df24ca12209795, type: 3}
   moveDistance: 3
   finishLineX: 7
+  timeLow: 1
+  timeHigh: 5
 --- !u!4 &1052640366
 Transform:
   m_ObjectHideFlags: 0
@@ -721,12 +723,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: -3337038689812066966, guid: 1127d7cfae2cd4a81bd17b528ae16698, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 509279500c08445dc88d264fba887530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
