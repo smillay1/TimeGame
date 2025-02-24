@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5190577572069212069}
   - component: {fileID: 669832000660975337}
   - component: {fileID: 4011356816615413099}
+  - component: {fileID: -4769554511997148477}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -133,3 +134,15 @@ MonoBehaviour:
   - {fileID: -7478503544382084746, guid: daa627a70f6994c86b0c58abe45498fc, type: 3}
   standingSprite: {fileID: 9197763148020754001, guid: 8e5a01e129ae943ceb254e8c6491b691, type: 3}
   animationSpeed: 0.3
+--- !u!114 &-4769554511997148477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926413670185377212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abea94930ea94e08a119425cc3ad885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

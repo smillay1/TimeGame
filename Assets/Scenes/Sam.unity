@@ -337,8 +337,8 @@ Transform:
   m_GameObject: {fileID: 466500379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0325, y: 0, z: -5}
-  m_LocalScale: {x: 3.7177846, y: 2.6, z: 1}
+  m_LocalPosition: {x: -0.0135, y: 0.0382, z: -5}
+  m_LocalScale: {x: 3.3906522, y: 2.020963, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -471,6 +471,8 @@ MonoBehaviour:
   horse2Prefab: {fileID: 7613551929814466384, guid: 34414852f9286470b9df24ca12209795, type: 3}
   moveDistance: 3
   finishLineX: 7
+  timeLow: 1
+  timeHigh: 5
 --- !u!1 &1726594766
 GameObject:
   m_ObjectHideFlags: 0

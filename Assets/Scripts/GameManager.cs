@@ -110,9 +110,24 @@ public class GameManager : MonoBehaviour
         float player2Difference = Mathf.Abs(targetTime - player2Time);
 
         MoveHorseSmoothly(horse1, new Vector3((targetTime / 2) * (moveDistance / 8) / player1Difference, 0, 0), 1f);
-        Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
         MoveHorseSmoothly(horse2, new Vector3((targetTime / 2) * (moveDistance / 8) / player2Difference, 0, 0), 1f);
-        Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
+        
+        float effectDuration = 2f;
+
+        if (player1Difference < player2Difference)
+        {
+            horse1.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
+            Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
+        }
+        else if (player2Difference < player1Difference)
+        {
+            horse2.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
+            Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
+        }
+        else
+        {
+            Debug.Log("It's a tie!");
+        }
 
         CheckWinCondition();
     }
