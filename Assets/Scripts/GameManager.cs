@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject horse1;
     private GameObject horse2;
+    private TrackEffects track1;
+    private TrackEffects track2;
     private float targetTime;
     private float startTime;
     private bool roundActive = false;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         SpawnHorses();
         StartNewRound();
+        GetTracks();
     }
 
     void Update()
@@ -104,8 +107,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Clear and update the text
-        targetTimeText.text = ""; // Clear the previous text
+        // update the text
         targetTimeText.text = "Target Time: " + targetTime.ToString("F2") + "s";
 
         // Force UI to refresh
@@ -123,17 +125,10 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
         player1Time = 0f;
         player2Time = 0f;
-<<<<<<< HEAD
+
         roundActive = true;
         PlayClockSound();
-=======
-
-        
->>>>>>> abb6889dbfc1c28a404f7e67c30f085a094cacb9
     }
-
-
-
 
 
     void DetermineRoundWinner()
@@ -147,6 +142,24 @@ public class GameManager : MonoBehaviour
         MoveHorseSmoothly(horse2, new Vector3((targetTime / 2) * (moveDistance / 8) / player2Difference, 0, 0), 1f);
         
         float effectDuration = 2f;
+
+        if (player1Difference > 1)
+        {
+            track1.FlashRed();
+        }
+        else if (player1Difference < .2)
+        {
+            track1.FlashGreen();
+        }
+
+        if (player2Difference > 1)
+        {
+            track2.FlashRed();
+        }
+        else if (player2Difference < .2)
+        {
+            track2.FlashGreen();
+        }
 
         if (player1Difference < player2Difference)
         {
@@ -199,6 +212,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("Start");
+        yield return new WaitForSeconds(1f);
 
         //OLD WAY OF RESTARTING SCENE BEFORE WE HAD START SCREEN \/
 
@@ -207,8 +221,8 @@ public class GameManager : MonoBehaviour
         //horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
 
         //StartNewRound();
-        horse1.GetComponent<Player>().ResetMoveCount();
-        horse2.GetComponent<Player>().ResetMoveCount();
+        SpawnHorses();
+        StartNewRound();
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
@@ -231,7 +245,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
     void PlayClockSound()
     {
         if (clockTickingSound != null && !clockTickingSound.isPlaying)
@@ -250,12 +263,12 @@ public class GameManager : MonoBehaviour
 
     void CheckStopClockSound()
     {
-        if (player1Time > 0 && player2Time > 0) 
+        if (player1Time > 0 && player2Time > 0)
         {
             StopClockSound();
         }
     }
-=======
+
     void SpawnPowerUp()
     {
         if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
@@ -281,6 +294,24 @@ public class GameManager : MonoBehaviour
         powerUpSpawned = false;
     }
 
->>>>>>> abb6889dbfc1c28a404f7e67c30f085a094cacb9
+        private void GetTracks()
+    {
+        track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();
+        if(track1 == null)
+        {
+            Debug.LogError("Need a track1 and script");
+        }
+
+        track2 = GameObject.FindGameObjectWithTag("Player2Track").GetComponent<TrackEffects>();
+        if (track2 == null)
+        {
+            Debug.LogError("Need a track2 and script");
+        }
+    }
+
+    private void RainBowTrack()
+    {
+
+    }
 
 }
