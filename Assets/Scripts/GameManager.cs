@@ -126,13 +126,9 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
         player1Time = 0f;
         player2Time = 0f;
-<<<<<<< HEAD
+
         roundActive = true;
         PlayClockSound();
-=======
-
-        
->>>>>>> abb6889dbfc1c28a404f7e67c30f085a094cacb9
     }
 
 
@@ -275,57 +271,7 @@ public class GameManager : MonoBehaviour
             StopClockSound();
         }
     }
-=======
-    void SpawnPowerUp()
-    {
-        if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
 
-        GameObject trailingHorse = horse1.transform.position.x < horse2.transform.position.x ? horse1 : horse2;
-
-        // Only spawn if the trailing horse HAS moved and WILL move next round
-        if (trailingHorse.GetComponent<Player>().HasMovedThisRound)
-        {
-            GameObject powerUpPrefab = Random.value > 0.5f ? speedPowerUpPrefab : freezePowerUpPrefab;
-
-            Vector3 spawnPosition = trailingHorse.transform.position + Vector3.right * 2.0f;
-            GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
-
-            // Reset power-up spawn flag when collected
-            powerUp.GetComponent<Powerup>().OnCollected += () => powerUpSpawned = false;
-        }
-    }
-
-    public void ResetPowerUpSpawn()
-    {
-        if (!powerUpSpawned) return;
-        powerUpSpawned = false;
-    }
-
-<<<<<<< HEAD
-    void PlayClockSound()
-    {
-        if (clockTickingSound != null && !clockTickingSound.isPlaying)
-        {
-            clockTickingSound.Play();
-        }
-    }
-
-    void StopClockSound()
-    {
-        if (clockTickingSound != null && clockTickingSound.isPlaying)
-        {
-            clockTickingSound.Stop();
-        }
-    }
-
-    void CheckStopClockSound()
-    {
-        if (player1Time > 0 && player2Time > 0) 
-        {
-            StopClockSound();
-        }
-    }
-=======
     void SpawnPowerUp()
     {
         if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
@@ -352,20 +298,6 @@ public class GameManager : MonoBehaviour
     }
 
         private void GetTracks()
-    {
-        track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();
-        if(track1 == null)
-        {
-            Debug.LogError("Need a track1 and script");
-        }
-
-        track2 = GameObject.FindGameObjectWithTag("Player2Track").GetComponent<TrackEffects>();
-        if (track2 == null)
-        {
-            Debug.LogError("Need a track2 and script");
-        }
-    }
-    private void GetTracks()
     {
         track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();
         if(track1 == null)
