@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     private float player2Time = 0f;
     public AudioSource clockTickingSound;
 
+    public GameObject speedPowerUpPrefab;
+    public GameObject freezePowerUpPrefab;
+    private bool powerUpSpawned = false;
+
     void Start()
     {
         SpawnHorses();
@@ -54,7 +58,20 @@ public class GameManager : MonoBehaviour
             }
 
         }
+
+        int moveDifference = 0;
+        if (horse1 != null && horse2 != null)
+        {
+            moveDifference = Mathf.Abs(horse1.GetComponent<Player>().MoveCount - horse2.GetComponent<Player>().MoveCount);
+        }
+
+        if (moveDifference >= 3 && !powerUpSpawned)
+        {
+            SpawnPowerUp();
+            powerUpSpawned = true; // Only spawn one until collected
+        }
     }
+    
 
     void SpawnHorses()
     {
@@ -77,6 +94,8 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
     {
+        roundActive = true;
+        Debug.Log("StartNewRound() was called! Target time: " + targetTime);
         targetTime = Random.Range(timeLow, timeHigh);
 
         if (targetTimeText == null)
@@ -96,11 +115,21 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("New target time displayed on UI: " + targetTime);
 
+        horse1.GetComponent<Player>().ResetMovement();
+        horse2.GetComponent<Player>().ResetMovement();
+        horse1.GetComponent<Player>().ResetMoveCount();
+        horse2.GetComponent<Player>().ResetMoveCount();
+        
         startTime = Time.time;
         player1Time = 0f;
         player2Time = 0f;
+<<<<<<< HEAD
         roundActive = true;
         PlayClockSound();
+=======
+
+        
+>>>>>>> abb6889dbfc1c28a404f7e67c30f085a094cacb9
     }
 
 
@@ -178,6 +207,8 @@ public class GameManager : MonoBehaviour
         //horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
 
         //StartNewRound();
+        horse1.GetComponent<Player>().ResetMoveCount();
+        horse2.GetComponent<Player>().ResetMoveCount();
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
@@ -200,6 +231,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+<<<<<<< HEAD
     void PlayClockSound()
     {
         if (clockTickingSound != null && !clockTickingSound.isPlaying)
@@ -223,5 +255,32 @@ public class GameManager : MonoBehaviour
             StopClockSound();
         }
     }
+=======
+    void SpawnPowerUp()
+    {
+        if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
+
+        GameObject trailingHorse = horse1.transform.position.x < horse2.transform.position.x ? horse1 : horse2;
+
+        // Only spawn if the trailing horse HAS moved and WILL move next round
+        if (trailingHorse.GetComponent<Player>().HasMovedThisRound)
+        {
+            GameObject powerUpPrefab = Random.value > 0.5f ? speedPowerUpPrefab : freezePowerUpPrefab;
+
+            Vector3 spawnPosition = trailingHorse.transform.position + Vector3.right * 2.0f;
+            GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+
+            // Reset power-up spawn flag when collected
+            powerUp.GetComponent<Powerup>().OnCollected += () => powerUpSpawned = false;
+        }
+    }
+
+    public void ResetPowerUpSpawn()
+    {
+        if (!powerUpSpawned) return;
+        powerUpSpawned = false;
+    }
+
+>>>>>>> abb6889dbfc1c28a404f7e67c30f085a094cacb9
 
 }
