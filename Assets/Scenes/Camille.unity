@@ -155,6 +155,9 @@ MonoBehaviour:
   finishLineX: 7
   timeLow: 1
   timeHigh: 5
+  clockTickingSound: {fileID: 0}
+  speedPowerUpPrefab: {fileID: 0}
+  freezePowerUpPrefab: {fileID: 0}
 --- !u!4 &293436827
 Transform:
   m_ObjectHideFlags: 0
@@ -251,8 +254,8 @@ Transform:
   m_GameObject: {fileID: 1171718380}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32262468, y: 0.12068185, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.14, y: -0.38, z: 0}
+  m_LocalScale: {x: -1.1301329, y: 1.1169918, z: -1.0512863}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
