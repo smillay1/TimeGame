@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Camille.unity
     guid: cdc1a1e89efe84f378a1e611f430b0da
+  - enabled: 1
+    path: Assets/Scenes/Sam.unity
+    guid: 48f69355cdc18469abb75aea0d9f9e39
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
