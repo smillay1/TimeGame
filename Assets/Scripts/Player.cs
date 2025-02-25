@@ -40,6 +40,9 @@ public abstract class Player : MonoBehaviour
 
     public void Move(Vector2 velocity, float duration)
     {
+
+        Debug.Log($"{gameObject.name} is attempting to move.");
+
         if (isFrozen)
         {
             Debug.Log(gameObject.name + " is frozen!");
@@ -54,6 +57,7 @@ public abstract class Player : MonoBehaviour
         }
         hasMovedThisRound = true;
         moveCount++;
+        Debug.Log($"{gameObject.name} has moved this round!");
 
         isMoving = true;
         StartCoroutine(MoveCoroutine(velocity, duration));

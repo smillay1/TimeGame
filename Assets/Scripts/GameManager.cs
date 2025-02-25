@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         SpawnHorses();
         StartNewRound();
         GetTracks();
+        Invoke("TestSpawnPowerUp", 2f);
     }
 
     void Update()
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
 
         if (moveDifference >= 3 && !powerUpSpawned)
         {
+            Debug.Log("Attempting to call SpawnPowerUp()");
             SpawnPowerUp();
             powerUpSpawned = true; // Only spawn one until collected
         }
@@ -273,21 +275,43 @@ public class GameManager : MonoBehaviour
 
     void SpawnPowerUp()
     {
-        if (horse1 == null || horse2 == null) return; // ✅ Prevent errors
+        if (horse1 == null || horse2 == null) {
+            Debug.Log("SpawnPowerUp() aborted: One of the horses is null.");
+            return; // ✅ Prevent errors
+        }
+
+        int moveDifference = Mathf.Abs(horse1.GetComponent<Player>().MoveCount - horse2.GetComponent<Player>().MoveCount);
+        Debug.Log($"🟡 Move Difference: {moveDifference}, Power-up spawned: {powerUpSpawned}");
+
+        if (moveDifference < 3 || powerUpSpawned) 
+        {
+            Debug.Log("Conditions not met for spawning power-up.");
+            return;
+        }
 
         GameObject trailingHorse = horse1.transform.position.x < horse2.transform.position.x ? horse1 : horse2;
 
-        // Only spawn if the trailing horse HAS moved and WILL move next round
-        if (trailingHorse.GetComponent<Player>().HasMovedThisRound)
+        if (!trailingHorse.GetComponent<Player>().HasMovedThisRound)
         {
-            GameObject powerUpPrefab = Random.value > 0.5f ? speedPowerUpPrefab : freezePowerUpPrefab;
-
-            Vector3 spawnPosition = trailingHorse.transform.position + Vector3.right * 2.0f;
-            GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
-
-            // Reset power-up spawn flag when collected
-            powerUp.GetComponent<Powerup>().OnCollected += () => powerUpSpawned = false;
+            Debug.Log("Power-up not spawning: trailing horse has not moved yet.");
+            return;
         }
+
+        GameObject powerUpPrefab = Random.value > 0.5f ? speedPowerUpPrefab : freezePowerUpPrefab;
+
+        if (powerUpPrefab == null)
+        {
+            Debug.LogError("Power-up prefab is null! Make sure it is assigned in the Inspector.");
+            return;
+        }
+
+        Vector3 spawnPosition = trailingHorse.transform.position + Vector3.right * 2.0f;
+        Debug.Log($"✅ Spawning power-up: {powerUpPrefab.name} at {spawnPosition}");
+
+        GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+        powerUp.GetComponent<Powerup>().OnCollected += () => powerUpSpawned = false; // Reset power-up spawn flag when collected
+
+        powerUpSpawned = true; // Prevent spawning another power-up until collected
     }
 
     public void ResetPowerUpSpawn()
@@ -314,6 +338,12 @@ public class GameManager : MonoBehaviour
     private void RainBowTrack()
     {
 
+    }
+
+    void TestSpawnPowerUp()
+    {
+        Debug.Log("⚡ FORCING POWER-UP SPAWN!");
+        SpawnPowerUp();
     }
 
 }
