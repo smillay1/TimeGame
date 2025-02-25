@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3745116800376083297}
   - component: {fileID: 6979839433733498946}
   - component: {fileID: 5362499178761490633}
+  - component: {fileID: 1742417205679994860}
   m_Layer: 0
   m_Name: Frog2
   m_TagString: Untagged
@@ -128,7 +129,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323bd133ef2c50944856913232dc44f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 1.5
   runningSprites:
   - {fileID: 4162792547080675479, guid: 6120a2e33130141678a1727cf49b5d7f, type: 3}
   standingSprite: {fileID: 5491295459281514357, guid: bb7288d97afd841d087381ce589cdbf9, type: 3}
   animationSpeed: 0.5
+--- !u!114 &1742417205679994860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193419086519096113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abea94930ea94e08a119425cc3ad885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
