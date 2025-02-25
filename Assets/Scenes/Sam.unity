@@ -198,60 +198,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &469286766
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 469286768}
-  - component: {fileID: 469286767}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &469286767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469286766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16421f7a5705849058c595e286b4dde1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTimeText: {fileID: 1886582583}
-  horse1Prefab: {fileID: 926413670185377212, guid: 1a4465d5ef3e944c99292a3e29988120, type: 3}
-  horse2Prefab: {fileID: 7613551929814466384, guid: 34414852f9286470b9df24ca12209795, type: 3}
-  moveDistance: 3
-  finishLineX: 7
-  timeLow: 1
-  timeHigh: 5
-  clockTickingSound: {fileID: 1991042535}
-  speedPowerUpPrefab: {fileID: 0}
-  freezePowerUpPrefab: {fileID: 0}
---- !u!4 &469286768
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469286766}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 278.72784, y: 146.4124, z: -3.0260928}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &889084210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,7 +1129,6 @@ SceneRoots:
   - {fileID: 2016023017}
   - {fileID: 1406322468}
   - {fileID: 1239968718}
-  - {fileID: 469286768}
   - {fileID: 1242170708}
   - {fileID: 359195985}
   - {fileID: 1991042536}
