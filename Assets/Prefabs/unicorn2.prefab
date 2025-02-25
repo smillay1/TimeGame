@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5419497717709088263}
   - component: {fileID: 6986365955961537643}
   - component: {fileID: 2508318775285628910}
+  - component: {fileID: 991791582919194842}
   m_Layer: 0
   m_Name: unicorn2
   m_TagString: Untagged
@@ -181,3 +182,15 @@ MonoBehaviour:
   - {fileID: 4642147599611299522, guid: a16c71a36d7d544c9baf8f862802c2a1, type: 3}
   standingSprite: {fileID: -2098444231469470417, guid: e352cf400a89d42fa8f1203324b659a6, type: 3}
   animationSpeed: 0.1
+--- !u!114 &991791582919194842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2598671077708960835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abea94930ea94e08a119425cc3ad885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

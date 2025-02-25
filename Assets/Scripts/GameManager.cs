@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
     {
+        Debug.Log("✅ StartNewRound() is running! Resetting target time.");
         roundActive = true;
         Debug.Log("StartNewRound() was called! Target time: " + targetTime);
         targetTime = Random.Range(timeLow, timeHigh);
