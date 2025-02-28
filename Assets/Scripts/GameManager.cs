@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI targetTimeText;
+    public static GameManager Instance { get; private set; }
+
     public GameObject horse1Prefab;
     public GameObject horse2Prefab;
     public float moveDistance = 1.5f;
@@ -223,12 +225,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator RestartGame(MainMenuManager.Player winner)
+    public IEnumerator RestartGame(MainMenuManager.Player winner)
     {
         yield return new WaitForSeconds(3f);
 
         MainMenuManager.NextScene(winner);
-        //SceneManager.LoadScene("Start");
+        
 
         yield return new WaitForSeconds(1f);
 

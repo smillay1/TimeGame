@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4769554511997148477}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323bd133ef2c50944856913232dc44f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 1.5
   runningSprites:
   - {fileID: -6343923009228427296, guid: 5a05e9b5c39534737b01a3fd71f1ad92, type: 3}
   - {fileID: -7478503544382084746, guid: daa627a70f6994c86b0c58abe45498fc, type: 3}
