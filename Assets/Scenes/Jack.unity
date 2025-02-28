@@ -976,8 +976,8 @@ MonoBehaviour:
   bigSparkleSound: {fileID: 1537772159}
   smallSparkleSound: {fileID: 773752043}
   badSound: {fileID: 1449664473}
-  speedPowerUpPrefab: {fileID: 0}
-  freezePowerUpPrefab: {fileID: 0}
+  speedPowerUpPrefab: {fileID: 996822320987120894, guid: 447fd7cb9999140ab8a8e356ec29360f, type: 3}
+  freezePowerUpPrefab: {fileID: 7670633540666646772, guid: 56670c3c594254b7cb2253c75657da17, type: 3}
   squareBurstEffect: {fileID: 1131601302986187860, guid: c08505ee2070644b69e23f78146f8be3, type: 3}
 --- !u!4 &1052640366
 Transform:
