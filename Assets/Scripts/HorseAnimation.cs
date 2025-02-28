@@ -25,7 +25,7 @@ public class HorseAnimation : Player
 
     protected override void Animate()
     {
-        Debug.Log("animating");
+        // Debug.Log("animating");
         if (runningSprites.Count == 0 || spriteRenderer == null)
             return;
 

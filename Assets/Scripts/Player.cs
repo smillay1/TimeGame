@@ -40,6 +40,9 @@ public abstract class Player : MonoBehaviour
 
     public void Move(Vector2 velocity, float duration)
     {
+
+        Debug.Log($"{gameObject.name} is attempting to move.");
+
         if (isFrozen)
         {
             Debug.Log(gameObject.name + " is frozen!");
@@ -53,11 +56,13 @@ public abstract class Player : MonoBehaviour
             speedBoostActive = false; // Reset after use
         }
         hasMovedThisRound = true;
-        moveCount++;
+        MoveCount++;
+        Debug.Log($"{gameObject.name} has moved this round!");
 
         isMoving = true;
         StartCoroutine(MoveCoroutine(velocity, duration));
         
+        FindObjectOfType<GameManager>().CheckPowerUpSpawnCondition();
     }
 
     private IEnumerator MoveCoroutine(Vector2 velocity, float duration)
@@ -90,6 +95,8 @@ public abstract class Player : MonoBehaviour
     {
         isFrozen = true;
         Debug.Log(gameObject.name + " is frozen for 6 seconds!");
+
+        rb.linearVelocity = Vector2.zero;
         
         yield return new WaitForSeconds(6f); // Wait for freeze duration
 
