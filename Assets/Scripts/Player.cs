@@ -56,7 +56,6 @@ public abstract class Player : MonoBehaviour
             speedBoostActive = false; // Reset after use
         }
         hasMovedThisRound = true;
-        MoveCount++;
         Debug.Log($"{gameObject.name} has moved this round!");
 
         isMoving = true;
@@ -123,6 +122,12 @@ public abstract class Player : MonoBehaviour
     public void ResetMovement()
     {
         hasMovedThisRound = false; // ✅ Reset movement tracking
+    }
+
+    public void IncrementMoveCount()
+    {
+        MoveCount++;  // ✅ Increases only for the winner
+        Debug.Log(gameObject.name + " move count increased to " + MoveCount);
     }
 
 }
