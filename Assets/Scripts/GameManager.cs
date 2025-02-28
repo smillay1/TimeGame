@@ -62,19 +62,6 @@ public class GameManager : MonoBehaviour
             }
 
         }
-
-        int moveDifference = 0;
-        if (horse1 != null && horse2 != null)
-        {
-            moveDifference = Mathf.Abs(horse1.GetComponent<Player>().MoveCount - horse2.GetComponent<Player>().MoveCount);
-        }
-
-        if (moveDifference >= 3 && !powerUpSpawned)
-        {
-            Debug.Log("Attempting to call SpawnPowerUp()");
-            SpawnPowerUp();
-            powerUpSpawned = true; // Only spawn one until collected
-        }
     }
     
 
@@ -99,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
     {
-        Debug.Log("✅ StartNewRound() is running! Resetting target time.");
+        Debug.Log("StartNewRound() is running! Resetting target time.");
         roundActive = true;
         Debug.Log("StartNewRound() was called! Target time: " + targetTime);
         targetTime = Random.Range(timeLow, timeHigh);
@@ -122,8 +109,6 @@ public class GameManager : MonoBehaviour
 
         horse1.GetComponent<Player>().ResetMovement();
         horse2.GetComponent<Player>().ResetMovement();
-        horse1.GetComponent<Player>().ResetMoveCount();
-        horse2.GetComponent<Player>().ResetMoveCount();
         
         startTime = Time.time;
         player1Time = 0f;
@@ -266,10 +251,27 @@ public class GameManager : MonoBehaviour
     }
 
     void CheckStopClockSound()
-    {
-        if (player1Time > 0 && player2Time > 0)
         {
-            StopClockSound();
+            if (player1Time > 0 && player2Time > 0)
+            {
+                StopClockSound();
+            }
+        }
+
+    public void CheckPowerUpSpawnCondition()
+    {
+        if (horse1 != null && horse2 != null)
+        {
+            int moveDifference = Mathf.Abs(horse1.GetComponent<Player>().MoveCount - horse2.GetComponent<Player>().MoveCount);
+            Debug.Log($"Move Difference: {moveDifference}");
+
+            if (moveDifference >= 3 && !powerUpSpawned)
+            {
+                SpawnPowerUp();
+                powerUpSpawned = true;
+                horse1.GetComponent<Player>().ResetMoveCount();
+                horse2.GetComponent<Player>().ResetMoveCount();
+            }
         }
     }
 
