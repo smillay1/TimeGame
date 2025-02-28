@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public AudioSource clockTickingSound;
     public AudioSource bigSparkleSound;
 
+    public AudioSource smallSparkleSound;
+    public AudioSource badSound;
+
     public GameObject speedPowerUpPrefab;
     public GameObject freezePowerUpPrefab;
     private bool powerUpSpawned = false;
@@ -136,10 +139,12 @@ public class GameManager : MonoBehaviour
         if (player1Difference > 1.5)
         {
             track1.FlashRed();
+            badSound.Play();
         }
         if (player1Difference < .3)
         {
             track1.FlashGreen();
+            smallSparkleSound.Play();
         }
 
         if (player1Difference < .2)
@@ -151,10 +156,12 @@ public class GameManager : MonoBehaviour
         if (player2Difference > 1.5)
         {
             track2.FlashRed();
+            badSound.Play();
         }
         if (player2Difference < .3)
         {
             track2.FlashGreen();
+            smallSparkleSound.Play();
         }
 
         if (player2Difference < .2)
