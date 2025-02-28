@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI targetTimeText;
-    public static GameManager Instance { get; private set; }
+    public static GameManager Instance;
 
     public GameObject horse1Prefab;
     public GameObject horse2Prefab;
@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
         StartNewRound();
         GetTracks();
         Invoke("TestSpawnPowerUp", 2f);
+
+        if (Instance == null) {
+            Instance = this;
+        }
+        
     }
 
     void Update()
@@ -230,15 +235,28 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator RestartGame(MainMenuManager.Player winner)
     {
-        yield return new WaitForSeconds(3f);
+        if (horse1.transform.position.x > horse2.transform.position.x)
+        {
+            targetTimeText.text = "Player 1 Wins!";
+            
+        }
 
-        MainMenuManager.NextScene(winner);
+        if (horse1.transform.position.x < horse2.transform.position.x)
+        {
+            targetTimeText.text = "Player 2 Wins!";
+            
+        }
+
+    
+
+        yield return new WaitForSeconds(2f);
         
 
-        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-        SpawnHorses();
-        StartNewRound();
+
+        // SpawnHorses();
+        // StartNewRound();
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)

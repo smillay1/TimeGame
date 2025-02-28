@@ -978,7 +978,7 @@ MonoBehaviour:
   badSound: {fileID: 1449664473}
   speedPowerUpPrefab: {fileID: 0}
   freezePowerUpPrefab: {fileID: 0}
-  squareBurstEffect: {fileID: 0}
+  squareBurstEffect: {fileID: 1131601302986187860, guid: c08505ee2070644b69e23f78146f8be3, type: 3}
 --- !u!4 &1052640366
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,7 +1610,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -54.348522}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1620,7 +1620,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 44, y: 5.4}
+  m_Size: {x: 44, y: 114.26829}
   m_EdgeRadius: 0
 --- !u!4 &1542871978
 Transform:
@@ -1631,8 +1631,8 @@ Transform:
   m_GameObject: {fileID: 1542871974}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70797205, w: 0.70624053}
-  m_LocalPosition: {x: 11.34, y: -2.49, z: -4}
-  m_LocalScale: {x: 0.09818576, y: 0.121090375, z: 1}
+  m_LocalPosition: {x: 9.3643, y: -2.53, z: 0}
+  m_LocalScale: {x: 0.09818576, y: 0.12336688, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1718,8 +1718,8 @@ Transform:
   m_GameObject: {fileID: 1884751023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.069, y: 0.3893, z: -5}
-  m_LocalScale: {x: 4.5157413, y: 2.298318, z: 1}
+  m_LocalPosition: {x: -0.0231, y: 0.3893, z: -5}
+  m_LocalScale: {x: 3.7636955, y: 2.298318, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 218235861}

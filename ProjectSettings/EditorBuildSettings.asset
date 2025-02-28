@@ -5,19 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/Jack.unity
-    guid: 766f17c86b3f8da4cacb887e831b2ada
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 4167b234cdc7e6a4c947e344d2096e65
   - enabled: 1
+    path: Assets/Scenes/Jack.unity
+    guid: 766f17c86b3f8da4cacb887e831b2ada
+  - enabled: 1
     path: Assets/Scenes/Camille.unity
     guid: cdc1a1e89efe84f378a1e611f430b0da
   - enabled: 1
+    path: Assets/Scenes/Hope.unity
+    guid: 8c188db7418584e3cbbb15385601da03
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 94d9ce8dee44846d8bd9a24647264177
+  - enabled: 0
     path: Assets/Scenes/Sam.unity
     guid: 48f69355cdc18469abb75aea0d9f9e39
   m_configObjects:
