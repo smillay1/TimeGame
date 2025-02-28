@@ -143,6 +143,9 @@ public class GameManager : MonoBehaviour
         
         float effectDuration = 2f;
 
+        bool player1Wins = player1Difference < player2Difference;
+        bool player2Wins = player2Difference < player1Difference;
+
         if (player1Difference > 1.5)
         {
             track1.FlashRed();
@@ -181,14 +184,14 @@ public class GameManager : MonoBehaviour
         if (player1Difference < player2Difference)
         {
             horse1.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
+            horse1.GetComponent<Player>().IncrementMoveCount();
             Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
-        }
-        if (player2Difference < player1Difference)
+        } else if (player2Difference < player1Difference)
         {
             horse2.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
+            horse2.GetComponent<Player>().IncrementMoveCount();
             Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
-        }
-        else
+        } else
         {
             Debug.Log("It's a tie!");
         }
