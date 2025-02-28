@@ -86,10 +86,15 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
+        //float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
+        Vector3 horse1Spawn = GameObject.FindGameObjectWithTag("Player1Spawner").transform.position;
+        Vector3 horse2Spawn = GameObject.FindGameObjectWithTag("Player2Spawner").transform.position;
 
-        horse1 = Instantiate(horse1Prefab, new Vector3(leftEdge, -1.6f, 0), Quaternion.identity);
-        horse2 = Instantiate(horse2Prefab, new Vector3(leftEdge, -3.1f, 0), Quaternion.identity);
+
+        //horse1 = Instantiate(horse1Prefab, new Vector3(leftEdge, -1.6f, 0), Quaternion.identity);
+        //horse2 = Instantiate(horse2Prefab, new Vector3(leftEdge, -3.1f, 0), Quaternion.identity);
+        horse1 = Instantiate(horse1Prefab, horse1Spawn, Quaternion.identity);
+        horse2 = Instantiate(horse2Prefab, horse2Spawn, Quaternion.identity);
 
         Debug.Log("Horse 1 spawned at: " + horse1.transform.position);
         Debug.Log("Horse 2 spawned at: " + horse2.transform.position);
@@ -184,12 +189,12 @@ public class GameManager : MonoBehaviour
         if (horse1.transform.position.x >= finishLineX)
         {
             targetTimeText.text = "Player 1 Wins!";
-            StartCoroutine(RestartGame());
+            StartCoroutine(RestartGame(MainMenuManager.Player.Player1));
         }
         else if (horse2.transform.position.x >= finishLineX)
         {
             targetTimeText.text = "Player 2 Wins!";
-            StartCoroutine(RestartGame());
+            StartCoroutine(RestartGame(MainMenuManager.Player.Player2));
         }
         else
         {
@@ -207,20 +212,15 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator RestartGame()
+    IEnumerator RestartGame(MainMenuManager.Player winner)
     {
         yield return new WaitForSeconds(3f);
 
-        SceneManager.LoadScene("Start");
+        MainMenuManager.NextScene(winner);
+        //SceneManager.LoadScene("Start");
+
         yield return new WaitForSeconds(1f);
 
-        //OLD WAY OF RESTARTING SCENE BEFORE WE HAD START SCREEN \/
-
-        //float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
-        //horse1.transform.position = new Vector3(leftEdge, -2f, 0);
-        //horse2.transform.position = new Vector3(leftEdge, -3.1f, 0);
-
-        //StartNewRound();
         SpawnHorses();
         StartNewRound();
     }

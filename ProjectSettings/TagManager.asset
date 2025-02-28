@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Player1Track
   - Player2Track
+  - Player1Spawner
+  - Player2Spawner
   layers:
   - Default
   - TransparentFX
