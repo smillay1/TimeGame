@@ -25,10 +25,12 @@ public class GameManager : MonoBehaviour
     private float player1Time = 0f;
     private float player2Time = 0f;
     public AudioSource clockTickingSound;
+    public AudioSource bigSparkleSound;
 
     public GameObject speedPowerUpPrefab;
     public GameObject freezePowerUpPrefab;
     private bool powerUpSpawned = false;
+    public GameObject squareBurstEffect;
 
     void Start()
     {
@@ -144,22 +146,35 @@ public class GameManager : MonoBehaviour
         
         float effectDuration = 2f;
 
-        if (player1Difference > 1)
+        if (player1Difference > 1.5)
         {
             track1.FlashRed();
         }
-        else if (player1Difference < .2)
+        if (player1Difference < .3)
         {
             track1.FlashGreen();
         }
 
-        if (player2Difference > 1)
+        if (player1Difference < .2)
+        {
+            Instantiate(squareBurstEffect, horse1.transform.position + new Vector3(-0.5f, 0, 0), Quaternion.identity);
+            bigSparkleSound.Play();
+        }
+
+        if (player2Difference > 1.5)
         {
             track2.FlashRed();
         }
-        else if (player2Difference < .2)
+        if (player2Difference < .3)
         {
             track2.FlashGreen();
+        }
+
+        if (player2Difference < .2)
+        {
+            Instantiate(squareBurstEffect, horse2.transform.position + new Vector3(-0.5f, 0, 0), Quaternion.identity);
+            Debug.Log("ZOOOOOOOOM");
+            bigSparkleSound.Play();
         }
 
         if (player1Difference < player2Difference)
@@ -167,7 +182,7 @@ public class GameManager : MonoBehaviour
             horse1.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
             Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
         }
-        else if (player2Difference < player1Difference)
+        if (player2Difference < player1Difference)
         {
             horse2.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
             Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
