@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 
 public class GameManager : MonoBehaviour
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public IEnumerator RestartGame(MainMenuManager.Player winner)
+    public IEnumerator RestartGame(EndManager.Player winner)
     {
         if (horse1.transform.position.x > horse2.transform.position.x)
         {
@@ -230,7 +231,8 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
-        
+
+        EndManager.AddWinner(winner);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 

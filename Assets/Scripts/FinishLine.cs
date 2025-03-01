@@ -7,12 +7,12 @@ public class FinishLine : MonoBehaviour
         if (other.CompareTag("Player1"))
         {
             Debug.Log("Player 1 Wins!");
-            GameManager.Instance.StartCoroutine(GameManager.Instance.RestartGame(MainMenuManager.Player.Player1));
+            GameManager.Instance.StartCoroutine(GameManager.Instance.RestartGame(EndManager.Player.Player1));
         }
         else if (other.CompareTag("Player2"))
         {
             Debug.Log("Player 2 Wins!");
-            GameManager.Instance.StartCoroutine(GameManager.Instance.RestartGame(MainMenuManager.Player.Player2));
+            GameManager.Instance.StartCoroutine(GameManager.Instance.RestartGame(EndManager.Player.Player2));
         }
     }
 }
