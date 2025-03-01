@@ -1,3 +1,5 @@
+//Script handling main starting menu functionality
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -14,11 +16,6 @@ public class MainMenuManager : MonoBehaviour
         Winners.Clear();
         CurrScene = 0;
         SceneManager.LoadScene(SceneOrder[CurrScene]);
-    }
-
-    public void StartFrog()
-    {
-        SceneManager.LoadScene("Camille");
     }
 
     public static void NextScene(Player winner)

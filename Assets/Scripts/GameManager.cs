@@ -1,3 +1,5 @@
+//General script handling game functionality
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -75,7 +77,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-
+    //Spawns horses in at horse spawner at left side of screen
     void SpawnHorses()
     {
         Debug.Log("Spawning horses...");
@@ -86,13 +88,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        //float leftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)).x;
         Vector3 horse1Spawn = GameObject.FindGameObjectWithTag("Player1Spawner").transform.position;
         Vector3 horse2Spawn = GameObject.FindGameObjectWithTag("Player2Spawner").transform.position;
 
-
-        //horse1 = Instantiate(horse1Prefab, new Vector3(leftEdge, -1.6f, 0), Quaternion.identity);
-        //horse2 = Instantiate(horse2Prefab, new Vector3(leftEdge, -3.1f, 0), Quaternion.identity);
         horse1 = Instantiate(horse1Prefab, horse1Spawn, Quaternion.identity);
         horse2 = Instantiate(horse2Prefab, horse2Spawn, Quaternion.identity);
 
@@ -100,6 +98,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Horse 2 spawned at: " + horse2.transform.position);
     }
 
+    //Begin new round of guessing for both players
     void StartNewRound()
     {
         Debug.Log("StartNewRound() is running! Resetting target time.");
@@ -134,7 +133,7 @@ public class GameManager : MonoBehaviour
         PlayClockSound();
     }
 
-
+    //Move each horse forward in proportion to how close their guess is to the actual time.
     void DetermineRoundWinner()
     {
         roundActive = false;
@@ -213,7 +212,7 @@ public class GameManager : MonoBehaviour
         StartNewRound();
     }
 
-
+    //Once a player has won the round, move to the next
     public IEnumerator RestartGame(MainMenuManager.Player winner)
     {
         if (horse1.transform.position.x > horse2.transform.position.x)
@@ -234,7 +233,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
-
+    //Move horse smoothly instead of teleporting to next position
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
     {
 
@@ -255,6 +254,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Clock ticking during guessing
     void PlayClockSound()
     {
         if (clockTickingSound != null && !clockTickingSound.isPlaying)
@@ -279,6 +279,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    //Checks if players can get a powerup - when they are losing by 3 guesses or more
     public void CheckPowerUpSpawnCondition()
     {
         if (horse1 != null && horse2 != null)
@@ -296,6 +297,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Spawns powerups to trailing players
     void SpawnPowerUp()
     {
         if (horse1 == null || horse2 == null) {
@@ -342,7 +344,7 @@ public class GameManager : MonoBehaviour
         if (!powerUpSpawned) return;
         powerUpSpawned = false;
     }
-
+    //Tracks for lighting up when players preform well and poorly
         private void GetTracks()
     {
         track1 = GameObject.FindGameObjectWithTag("Player1Track").GetComponent<TrackEffects>();

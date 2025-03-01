@@ -1,3 +1,5 @@
+//Script handling effects depending on the preformance of the players
+
 using UnityEngine;
 using System.Collections;
 
@@ -35,18 +37,21 @@ public class TrackEffects : MonoBehaviour
         spriteRenderer.color = BaseColor; // Revert to previous color
     }
 
+    //Handles track color when players preform well
     public void FlashGreen()
     {
         Color targetColor = new Color(12f / 255f, 172f / 255f, 19f / 255f); // Normalized green color
         StartCoroutine(FlashCoroutine(1, targetColor));
     }
 
+    //Handles track color when players preform poorly
     public void FlashRed()
     {
         Color targetColor = new Color(185f / 255f, 14f / 255f, 10f / 255f); // Normalized green color
         StartCoroutine(FlashCoroutine(1, targetColor));
     }
 
+    
     private IEnumerator FlashCoroutine(float flashDuration, Color targetColor)
     {
         float segmentDuration = flashDuration / 3f;
