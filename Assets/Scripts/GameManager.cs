@@ -201,26 +201,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("It's a tie!");
         }
 
-        CheckWinCondition();
-    }
+        StartCoroutine(WaitBeforeNextRound());
 
-    void CheckWinCondition()
-    {
-        if (horse1.transform.position.x >= finishLineX)
-        {
-            targetTimeText.text = "Player 1 Wins!";
-            StartCoroutine(RestartGame(MainMenuManager.Player.Player1));
-        }
-        else if (horse2.transform.position.x >= finishLineX)
-        {
-            targetTimeText.text = "Player 2 Wins!";
-            StartCoroutine(RestartGame(MainMenuManager.Player.Player2));
-        }
-        else
-        {
-            
-            StartCoroutine(WaitBeforeNextRound());
-        }
     }
 
     IEnumerator WaitBeforeNextRound()
@@ -247,16 +229,11 @@ public class GameManager : MonoBehaviour
             
         }
 
-    
-
         yield return new WaitForSeconds(2f);
         
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-
-        // SpawnHorses();
-        // StartNewRound();
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)
