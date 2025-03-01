@@ -29,7 +29,7 @@ public class Powerup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Player horse = other.GetComponent<Player>();
+        Player horse = other.GetComponent<HorseAnimation>();
 
         if (horse != null && canBeCollected)
         {

@@ -1,7 +1,9 @@
+//Script handling the finishing of each round
 using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
+    //Compares player tags to finish line to determine winner
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player1"))

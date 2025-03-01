@@ -1,3 +1,5 @@
+//Script handling main starting menu functionality
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
