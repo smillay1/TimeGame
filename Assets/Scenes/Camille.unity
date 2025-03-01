@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  BaseColor: {r: 0.63529414, g: 0.49803922, b: 0.3647059, a: 1}
+  BaseColor: {r: 0.3137255, g: 0.4627451, b: 0.6156863, a: 1}
 --- !u!212 &465882036
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  BaseColor: {r: 0.63529414, g: 0.49803922, b: 0.3647059, a: 1}
+  BaseColor: {r: 0.3137255, g: 0.4627451, b: 0.6156863, a: 1}
 --- !u!212 &1583799595
 SpriteRenderer:
   m_ObjectHideFlags: 0
