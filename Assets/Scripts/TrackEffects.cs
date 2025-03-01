@@ -6,7 +6,7 @@ public class TrackEffects : MonoBehaviour
     public float speed = 1.0f; // Speed of rainbow transition
     private SpriteRenderer spriteRenderer;
     private Coroutine rainbowCoroutine;
-    Color BaseColor = new Color(162f / 255f, 127f / 255f, 93f / 255f);
+    public Color BaseColor = new Color(162f / 255f, 127f / 255f, 93f / 255f);
 
     void Start()
     {
