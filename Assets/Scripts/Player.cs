@@ -13,6 +13,9 @@ public abstract class Player : MonoBehaviour
     public bool HasMovedThisRound => hasMovedThisRound; 
     private int moveCount = 0;
     public int MoveCount { get; private set; }
+    private float boostDuration = 4f;
+    private float boostedSpeedMultiplier = 4.0f;
+    private bool isBoosted = false;
     
     public float moveDistance = 1.5f;
 
@@ -50,10 +53,10 @@ public abstract class Player : MonoBehaviour
         }
 
         // Apply speed boost but only for this move
-        if (speedBoostActive)
+        if (isBoosted)
         {
-            velocity *= 2; // Double movement speed
-            speedBoostActive = false; // Reset after use
+            velocity *= boostedSpeedMultiplier; // Double movement speed
+            duration *= boostedSpeedMultiplier;
         }
         hasMovedThisRound = true;
         Debug.Log($"{gameObject.name} has moved this round!");
@@ -77,8 +80,21 @@ public abstract class Player : MonoBehaviour
 
     public void ActivateSpeedBoost()
     {
-        Debug.Log(gameObject.name + " got a speed boost!");
-        speedBoostActive = true; // ✅ Speed boost applies to next move
+        if (!isBoosted)
+        {
+            Debug.Log($"{gameObject.name} is now SUPER FAST! ⚡");
+            isBoosted = true;
+            speedBoostActive = true;
+            StartCoroutine(ResetSpeedAfterDelay());
+        }
+    }
+
+    private IEnumerator ResetSpeedAfterDelay()
+    {
+        yield return new WaitForSeconds(boostDuration);
+        isBoosted = false;
+        speedBoostActive = false;
+        Debug.Log($"{gameObject.name} speed boost has ended. 🏇");
     }
 
     public void FreezeOpponent()
@@ -121,12 +137,12 @@ public abstract class Player : MonoBehaviour
 
     public void ResetMovement()
     {
-        hasMovedThisRound = false; // ✅ Reset movement tracking
+        hasMovedThisRound = false; // Reset movement tracking
     }
 
     public void IncrementMoveCount()
     {
-        MoveCount++;  // ✅ Increases only for the winner
+        MoveCount++;  // Increases only for the winner
         Debug.Log(gameObject.name + " move count increased to " + MoveCount);
     }
 
