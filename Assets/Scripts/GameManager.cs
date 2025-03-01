@@ -42,8 +42,7 @@ public class GameManager : MonoBehaviour
         SpawnHorses();
         StartNewRound();
         GetTracks();
-        Invoke("TestSpawnPowerUp", 2f);
-
+        
         if (Instance == null) {
             Instance = this;
         }
@@ -364,10 +363,5 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void TestSpawnPowerUp()
-    {
-        Debug.Log("⚡ FORCING POWER-UP SPAWN!");
-        SpawnPowerUp();
-    }
 
 }
