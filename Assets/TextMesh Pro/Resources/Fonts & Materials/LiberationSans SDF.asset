@@ -63,8 +63,13 @@ Material:
     - _WeightNormal: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+<<<<<<< HEAD
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.003921569, g: 0.28235295, b: 0.6784314, a: 1}
+=======
+    - _FaceColor: {r: 0.9487362, g: 0.9811321, b: 0.9762623, a: 1}
+    - _OutlineColor: {r: 0.9579922, g: 0.9811321, b: 0.97472537, a: 1}
+>>>>>>> 0e1dba46ff1159e2a16b98c42d4cd34aa5f0b131
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
@@ -7971,8 +7976,7 @@ MonoBehaviour:
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
   m_ShouldReimportFontFeatures: 0
-  m_FallbackFontAssetTable:
-  - {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_FallbackFontAssetTable: []
   m_FontWeightTable:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}

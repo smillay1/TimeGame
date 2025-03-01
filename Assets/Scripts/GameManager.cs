@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI targetTimeText;
+    public static GameManager Instance;
+
     public GameObject horse1Prefab;
     public GameObject horse2Prefab;
     public float moveDistance = 1.5f;
@@ -41,6 +43,11 @@ public class GameManager : MonoBehaviour
         StartNewRound();
         GetTracks();
         Invoke("TestSpawnPowerUp", 2f);
+
+        if (Instance == null) {
+            Instance = this;
+        }
+        
     }
 
     void Update()
@@ -141,6 +148,9 @@ public class GameManager : MonoBehaviour
         
         float effectDuration = 2f;
 
+        bool player1Wins = player1Difference < player2Difference;
+        bool player2Wins = player2Difference < player1Difference;
+
         if (player1Difference > 1.5)
         {
             track1.FlashRed();
@@ -179,38 +189,20 @@ public class GameManager : MonoBehaviour
         if (player1Difference < player2Difference)
         {
             horse1.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
+            horse1.GetComponent<Player>().IncrementMoveCount();
             Debug.Log("Player 1 wins this round! Horse moved to: " + horse1.transform.position);
-        }
-        if (player2Difference < player1Difference)
+        } else if (player2Difference < player1Difference)
         {
             horse2.GetComponent<HorseEffects>().StartRainbowEffect(effectDuration);
+            horse2.GetComponent<Player>().IncrementMoveCount();
             Debug.Log("Player 2 wins this round! Horse moved to: " + horse2.transform.position);
-        }
-        else
+        } else
         {
             Debug.Log("It's a tie!");
         }
 
-        CheckWinCondition();
-    }
+        StartCoroutine(WaitBeforeNextRound());
 
-    void CheckWinCondition()
-    {
-        if (horse1.transform.position.x >= finishLineX)
-        {
-            targetTimeText.text = "Player 1 Wins!";
-            StartCoroutine(RestartGame(MainMenuManager.Player.Player1));
-        }
-        else if (horse2.transform.position.x >= finishLineX)
-        {
-            targetTimeText.text = "Player 2 Wins!";
-            StartCoroutine(RestartGame(MainMenuManager.Player.Player2));
-        }
-        else
-        {
-            
-            StartCoroutine(WaitBeforeNextRound());
-        }
     }
 
     IEnumerator WaitBeforeNextRound()
@@ -223,17 +215,25 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator RestartGame(MainMenuManager.Player winner)
+    public IEnumerator RestartGame(MainMenuManager.Player winner)
     {
-        yield return new WaitForSeconds(3f);
+        if (horse1.transform.position.x > horse2.transform.position.x)
+        {
+            targetTimeText.text = "Player 1 Wins!";
+            
+        }
 
-        MainMenuManager.NextScene(winner);
-        //SceneManager.LoadScene("Start");
+        if (horse1.transform.position.x < horse2.transform.position.x)
+        {
+            targetTimeText.text = "Player 2 Wins!";
+            
+        }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        
 
-        SpawnHorses();
-        StartNewRound();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 
     private void MoveHorseSmoothly(GameObject horse, Vector3 moveOffset, float duration)

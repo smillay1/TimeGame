@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartGame()
     {
         Winners.Clear();
-        CurrScene = 1;
+        CurrScene = 0;
         SceneManager.LoadScene(SceneOrder[CurrScene]);
     }
 

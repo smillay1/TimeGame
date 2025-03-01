@@ -8,6 +8,8 @@ TagManager:
   - Player2Track
   - Player1Spawner
   - Player2Spawner
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
